@@ -68,6 +68,8 @@ function hack2 { php -r '$charset="0123456789abcdef";$fd = fopen("/dev/urandom",
 function hack3 { tput setaf 2; php -r '$charset="0123456789abcdef";$fd = fopen("/dev/urandom", "r"); while(true){ $c = bin2hex(fread($fd, 1266));for ($i=0;$i<211*6;$i+=6){$x=0;for($j=0;$j<4;$j++){$x += strpos($charset, $c[$i + $j]);}echo chr(32+$x);}echo "\n"; }'; }
 function syncup { if [ ! -p /tmp/syncupfifo ]; then mkfifo /tmp/syncupfifo; fi; cat /tmp/syncupfifo; }
 function syncupgo { if [ ! -p /tmp/syncupfifo ]; then echo No syncup clients found?; else echo > /tmp/syncupfifo; sleep 0.1; rm /tmp/syncupfifo; fi; }
+function pushdot { if [ $# -ne 1 ]; then echo 'Pass a file please.'; exit 1; fi; cd ~/.dotfiles; cp ~/.$1 .; git add .$1; git commit; git push; }
+function updatedot { cd ~/.dotfiles; git pull; cp .* ~; }
 shopt -s autocd
 shopt -s histappend
 
