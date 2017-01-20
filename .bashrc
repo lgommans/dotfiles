@@ -53,7 +53,7 @@ alias catall='for i in * .*; do if [ ! -d "$i" ]; then echo File $i:; cat "$i"; 
 alias hdall='for i in * .*; do if [ ! -d "$i" ]; then echo File $i:; hd "$i" | head -7; echo ---------------; echo; fi; done'
 #function vimb { vim - +"file $1"; };
 function sg { apt-cache search $@ | grep -i -C999 --color=always $1; };
-function src { results=$(sg $@); resultcount=$(echo "$results" | wc -l); if [ "x$results" == "x" ]; then echo 'No results'; else if [ $resultcount -gt 50 ]; then "$results" | sort | less -R; else echo "$results" | sort; fi; fi; };
+function src { results=$(sg $@); resultcount=$(echo "$results" | wc -l); if [ "x$results" == "x" ]; then echo 'No results'; else if [ $resultcount -gt 50 ]; then echo "$results" | sort | less -R; else echo "$results" | sort; fi; fi; };
 function wt { curl wttr.in/$1; }
 function kascript { ps aux | grep "$1" | awk '{print $2}' | xargs kill; }
 function pidofscript { ps aux | grep "$1" | awk '{print $2}'; }
